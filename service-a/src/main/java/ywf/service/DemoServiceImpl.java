@@ -2,6 +2,7 @@ package ywf.service;
 
 import com.codingapi.txlcn.tc.annotation.DTXPropagation;
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
+import com.codingapi.txlcn.tc.annotation.TccTransaction;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,7 @@ public class DemoServiceImpl {
     @Autowired
     private ClientBService clientBService;
 
-    @Transactional
-    @LcnTransaction(propagation = DTXPropagation.SUPPORTS)
+    @LcnTransaction(propagation = DTXPropagation.REQUIRED)
     public String testTx(String name, String errorFlag) {
 
         // 本地插入数据库
@@ -30,7 +30,8 @@ public class DemoServiceImpl {
         userMapper.save(u);
 
         // 使用feign调用
-        String rpcRes = clientBService.save(name);
+        String rpcRes = "";
+        rpcRes = clientBService.save(name);
 
         // 设置出现异常
         if (StringUtils.isNotBlank(errorFlag)) {

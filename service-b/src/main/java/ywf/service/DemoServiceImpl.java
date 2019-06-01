@@ -5,7 +5,6 @@ import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ywf.domain.User;
 import ywf.mapper.UserMapper;
 
@@ -13,10 +12,9 @@ import ywf.mapper.UserMapper;
 @Slf4j
 public class DemoServiceImpl {
 
-    @Autowired
+   @Autowired
     private UserMapper userMapper;
 
-    @Transactional
     @LcnTransaction(propagation = DTXPropagation.SUPPORTS)
     public String save(String name) {
 
