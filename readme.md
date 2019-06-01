@@ -2,19 +2,19 @@ TXLCN 分布式事务
 ===
 
 1、使用tx-manager开启分布式事务管理
----
+##
 
 2、服务applicaiton.java 添加@EnableDistributedTransaction
----
+##
 
 3、发起方:方法添加注解 @LcnTransaction(propagation = DTXPropagation.REQUIRED)  注意：一定不要DTXPropagation.SUPPORTS
----
+##
 
 4、参与方：方法添加注解 @LcnTransaction(propagation = DTXPropagation.SUPPORTS)
----
+##
 
 事物传播行为介绍: 
-###
+######
     @Transactional(propagation=Propagation.REQUIRED) 
     如果有事务, 那么加入事务, 没有的话新建一个(默认情况下)
     @Transactional(propagation=Propagation.NOT_SUPPORTED) 
